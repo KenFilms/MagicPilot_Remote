@@ -16,9 +16,33 @@ https://github.com/user-attachments/assets/88d4dcbc-c6db-4bb7-9184-9daaf6ef9eb5
 
 Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Camera 6K), running on an M5Stack Core2. It talks to the camera over Bluetooth LE using the Blackmagic Camera Control protocol.
 
+## Table of contents
+
+- [Overview](#overview)
+  - [Why MagicPilot?](#why-magicpilot)
+  - [What can it control?](#-what-can-it-control)
+  - [Everything you need at a glance](#-everything-you-need-at-a-glance)
+- [Getting started](#getting-started)
+  - [Hardware](#-hardware)
+  - [Build and flash](#build-and-flash)
+    - [Arduino IDE](#arduino-ide)
+    - [PaltformIO](#paltformio)
+  - [Camera compatibility](#-camera-compatibility)
+- [Using the remote](#using-the-remote)
+  - [Pairing](#pairing)
+  - [Live readout and control](#live-readout-and-control)
+  - [Recording and timecode](#recording-and-timecode)
+  - [Focus](#focus)
+  - [Presets](#presets)
+  - [SD card](#sd-card)
+- [Project layout](#project-layout)
+- [Disclaimer](#disclaimer)
+
+## Overview
+
 ### Why MagicPilot?
 
-The BMPCC6K is an incredibly capable camera. But you want more flexibility when controlling it.
+The BMPCC6K is an incredibly capable camera. But many times you want more flexibility when controlling it.
 
 **MagicPilot puts the controls you need on a tiny touchscreen that you can keep beside the camera.**
 
@@ -26,11 +50,11 @@ The BMPCC6K is an incredibly capable camera. But you want more flexibility when 
 - **When the camera is out of reach.** In many filming situations you can't touch the camera's own controls, for example with the camera against a wall or mounted very high, such as on a crane. The remote changes settings and starts or stops recording from wherever you stand.
 
 
-## 🎛 What can it control?
+### 🎛 What can it control?
 
 MagicPilot puts the most important camera controls on a **compact, responsive touchscreen**—giving you a clear view of your camera's status and quick access to the settings you need while shooting.
 
-## ✨ Everything You need at a Glance
+### ✨ Everything You need at a Glance
 
 | | Feature | What it does |
  |---|---|---| 
@@ -43,7 +67,60 @@ MagicPilot puts the most important camera controls on a **compact, responsive to
   | 🔐 | **Bluetooth Pairing** | Connect securely using the camera's standard 6-digit Bluetooth PIN. |
 
 
-## Live readout and control
+## Getting started
+
+### 🧰 Hardware
+
+MagicPilot is designed around a small amount of readily available hardware:
+
+- **M5Stack Core2** — touchscreen remote and ESP32 platform
+- **BMPCC6K** — with Bluetooth enabled
+- **microSD card** — optional; required for preset storage and screenshots
+That's it.
+
+**No phone. No Wi-Fi network. No external computer.**
+
+Just a small touchscreen remote dedicated to your camera.
+
+### Build and flash
+
+#### Arduino IDE
+
+1. Install the **esp32 by Espressif Systems** board package, version **2.0.17**, and the **M5Core2** library (0.1.6 or newer) from the Library Manager.
+2. Open `MagicPilot_Remote.ino`. Keep the folder name `MagicPilot_Remote` and the `src` folder next to it, because the firmware is in `src/main.cpp`.
+3. Select the board **M5Stack-Core2** and a partition scheme with at least 1.5 MB of app space (for example **16M Flash (3MB APP/9.9MB FATFS)**).
+4. Select the serial port and click Upload.
+
+#### PaltformIO
+
+Requires [PlatformIO](https://platformio.org/).
+
+```sh
+pio run -e m5stack-core2              # build
+pio run -e m5stack-core2 -t upload    # build and flash
+pio device monitor                    # serial log at 115200 baud
+```
+
+### 🎥 Camera compatibility
+
+| Camera | Status |
+|---|---|
+| Blackmagic Pocket Cinema Camera 6K | 🟢 Supported |
+| Pocket Cinema Camera 6K G2 | 🟡 Not Tested |
+| Pocket Cinema Camera 6K Pro | 🟡 Not Tested |
+| Pocket Cinema Camera 4K | 🟡 Not Tested |
+
+## Using the remote
+
+### Pairing
+
+1. On the camera, open the Bluetooth setup menu and switch on Bluetooth.
+2. On the remote, tap the CONNECT button. The button reads SEARCH while it looks for the camera.
+3. Enter the 6-digit PIN shown on the camera on the keypad and tap OK.
+
+The button then reads ONLINE. The status bar at the bottom shows the connection state, and the Bluetooth icon in the header turns blue when connected.
+
+### Live readout and control
 
 The main screen shows the camera's settings as they change. To adjust one, tap its box (it gets an orange border), then use the - / + buttons.
 
@@ -69,13 +146,13 @@ Iris changes can only reach lenses the camera can drive.
 - **Header**: normally it shows only the title, the camera mode (STBY, REC or PLAY) and the Bluetooth icon with a blue circle once connected. Tap the header (away from the mode label) to also show the remote's battery next to the title and the camera battery marked "Camera", separated by thin vertical lines. Tap it again to hide them.
 - **Footer**: normally it shows only the status message, such as Standby or Camera found. Tap the footer to also show the three card slots with their type and minutes remaining. Tap it again to hide them.
 
-## Recording and timecode
+### Recording and timecode
 
 - **Record button**: the red dot starts recording and becomes a stop square while recording. The header reads STBY, REC or PLAY.
 - **Timecode**: the large readout turns red while recording. A TC badge marks the timecode view.
 - **Clip counter**: tap the timecode area, or the mode label (STBY, REC or PLAY) in the header, to switch between timecode and the camera's clip counter. During recording the counter follows the camera's own clip count and keeps its last value after you stop.
 
-## Focus
+### Focus
 
 Tap **FOCUS** on the main screen to open the focus page.
 
@@ -85,7 +162,7 @@ Tap **FOCUS** on the main screen to open the focus page.
 
 Focus changes only reach lenses the camera can drive.
 
-## Presets
+### Presets
 
 Tap **PRESETS** on the main screen. The page has two slots, each with its own **SAVE**, **LOAD** and **CLEAR** button and a short summary of what it holds.
 
@@ -96,56 +173,7 @@ Tap **PRESETS** on the main screen. The page has two slots, each with its own **
 
 Presets live on the SD card, so they survive power-off.
 
-
-## 🧰 Hardware
-
-MagicPilot is designed around a small amount of readily available hardware:
-
-- **M5Stack Core2** — touchscreen remote and ESP32 platform
-- **BMPCC6K** — with Bluetooth enabled
-- **microSD card** — optional; required for preset storage and screenshots
-That's it.
-
-**No phone. No Wi-Fi network. No external computer.**
-
-Just a small touchscreen remote dedicated to your camera.
-
-### 🎥 Camera compatibility
-
-| Camera | Status |
-|---|---|
-| Blackmagic Pocket Cinema Camera 6K | 🟢 Supported |
-| Pocket Cinema Camera 6K G2 | 🟡 Not Tested |
-| Pocket Cinema Camera 6K Pro | 🟡 Not Tested |
-| Pocket Cinema Camera 4K | 🟡 Not Tested |
-
-
-## Build and flash
-
-Requires [PlatformIO](https://platformio.org/).
-
-```sh
-pio run -e m5stack-core2              # build
-pio run -e m5stack-core2 -t upload    # build and flash
-pio device monitor                    # serial log at 115200 baud
-```
-
-### Arduino IDE
-
-1. Install the **esp32 by Espressif Systems** board package, version **2.0.17**, and the **M5Core2** library (0.1.6 or newer) from the Library Manager.
-2. Open `MagicPilot_Remote.ino`. Keep the folder name `MagicPilot_Remote` and the `src` folder next to it, because the firmware is in `src/main.cpp`.
-3. Select the board **M5Stack-Core2** and a partition scheme with at least 1.5 MB of app space (for example **16M Flash (3MB APP/9.9MB FATFS)**).
-4. Select the serial port and click Upload.
-
-## Pairing
-
-1. On the camera, open the Bluetooth setup menu and put it in pairing mode.
-2. On the remote, tap CONNECT. The button reads SEARCH while it looks for the camera.
-3. Enter the 6-digit PIN shown on the camera on the keypad and tap OK.
-
-The button then reads ONLINE. The status bar at the bottom shows the connection state, and the Bluetooth icon in the header turns blue when connected.
-
-## SD card
+### SD card
 
 | Path | Content |
 | --- | --- |
@@ -173,6 +201,7 @@ A preset file looks like this. `date` and `time` are the camera's clock at the m
 Presets saved by earlier versions in `/presets.txt` are not read.
 
 Without a card the remote still works, but saving and loading presets shows "No SD card".
+
 
 ## Project layout
 
