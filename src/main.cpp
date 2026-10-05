@@ -4,7 +4,7 @@
  * Author: Ken Friedl https://github.com/KenFilms
  * First Version:   2026-10-04
  * 
- * Current version: 1.0 Beta
+ * Current version: 1.0.0
  *
  * Touchscreen remote for Blackmagic cameras (tested with the Pocket Cinema Camera 6K), running on an
  * M5Stack Core2. It talks to the camera over Bluetooth LE with the Blackmagic Camera Control protocol,
