@@ -8,7 +8,6 @@
 ![MCU](https://img.shields.io/badge/MCU-ESP32-E7352C)
 ![Framework](https://img.shields.io/badge/framework-Arduino-00979D)
 ![Camera](https://img.shields.io/badge/camera-BMPCC6K-black)
-<!--![GitHub stars](https://img.shields.io/github/stars/MagicPilot/MagicPilot-Remote)-->
 
 https://github.com/user-attachments/assets/88d4dcbc-c6db-4bb7-9184-9daaf6ef9eb5
 
@@ -20,7 +19,6 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
 
 - [Overview](#overview)
   - [Why MagicPilot?](#why-magicpilot)
-  - [What can it control?](#-what-can-it-control)
   - [Everything you need at a glance](#-everything-you-need-at-a-glance)
 - [Getting started](#getting-started)
   - [Hardware](#-hardware)
@@ -31,7 +29,6 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
 - [Using the remote](#using-the-remote)
   - [Pairing](#pairing)
   - [Live readout and control](#live-readout-and-control)
-  - [Recording and timecode](#recording-and-timecode)
   - [Focus](#focus)
   - [Presets](#presets)
   - [SD card](#sd-card)
@@ -42,29 +39,20 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
 
 ### Why MagicPilot?
 
-The BMPCC6K is an incredibly capable camera. But many times you want more flexibility when controlling it.
-
 **MagicPilot puts the controls you need on a tiny touchscreen that you can keep beside the camera.**
 
 - **Next to your external monitor.** An external monitor is brighter than the camera's built-in screen, so that is where you look. MagicPilot mounts right beside it, so the settings are in your line of sight.
-- **When the camera is out of reach.** In many filming situations you can't touch the camera's own controls, for example with the camera against a wall or mounted very high, such as on a crane. The remote changes settings and starts or stops recording from wherever you stand.
-
-
-### 🎛 What can it control?
-
-MagicPilot puts the most important camera controls on a **compact, responsive touchscreen**—giving you a clear view of your camera's status and quick access to the settings you need while shooting.
+- **When the camera is out of reach.** With the camera against a wall or mounted very high, such as on a crane, the remote changes settings and starts or stops recording from wherever you stand.
 
 ### ✨ Everything You need at a Glance
 
 | | Feature | What it does |
- |---|---|---| 
- | 🔭 | **Focus Control** | Dedicated focus screen with a **NEAR → FAR** slider, precise 1% adjustments, and one-shot autofocus. | 
- | 📊 | **Live Camera Readout** | See ISO, shutter angle, FPS, white balance, tint, iris, timecode, battery levels and card status directly from the camera. | 
- | 🎛️ | **Instant Parameter Control** | Tap any adjustable value, select it, and use − / + to change it directly on the camera. |
-  | 🎥 | **Record Control** | Start and stop recording with a single dedicated button. | 
-  | 🕐 | **Timecode & Clip Counter** | Switch between timecode and clip count with a simple tap. | 
-  | 💾 | **Camera Presets** | Save and recall two complete camera configurations, including exposure and color settings. | 
-  | 🔐 | **Bluetooth Pairing** | Connect securely using the camera's standard 6-digit Bluetooth PIN. |
+|---|---|---|
+| 🔭 | **Focus Control** | **NEAR → FAR** slider, 1% steps and one-shot autofocus. |
+| 📊 | **Live Camera Readout** | ISO, shutter angle, FPS, white balance, tint, iris, timecode, battery and card status. |
+| 🎛️ | **Parameter Control** | Tap a value, then use − / + to change it on the camera. |
+| 🎥 | **Record Control** | Start and stop recording with one button. |
+| 💾 | **Camera Presets** | Save and recall two complete camera configurations. |
 
 
 ## Getting started
@@ -75,12 +63,11 @@ MagicPilot is designed around a small amount of readily available hardware:
 
 - **M5Stack Core2** — touchscreen remote and ESP32 platform
 - **BMPCC6K** — with Bluetooth enabled
-- **microSD card** — optional; required for preset storage and screenshots
+- **microSD card** — optional; required for preset storage.
+
 That's it.
 
 **No phone. No Wi-Fi network. No external computer.**
-
-Just a small touchscreen remote dedicated to your camera.
 
 ### Build and flash
 
@@ -140,18 +127,6 @@ The main screen shows the camera's settings as they change. To adjust one, tap i
 
 Iris changes can only reach lenses the camera can drive.
 
-- **Selecting**: the orange border marks the value the - / + buttons change. Holding a button repeats the step.
-- **Immediate feedback**: the new value shows as soon as it is sent. The camera's own report replaces it if the camera refused the change.
-- **Waiting for the camera**: values show "--" until the camera has reported them.
-- **Header**: normally it shows only the title, the camera mode (STBY, REC or PLAY) and the Bluetooth icon with a blue circle once connected. Tap the header (away from the mode label) to also show the remote's battery next to the title and the camera battery marked "Camera", separated by thin vertical lines. Tap it again to hide them.
-- **Footer**: normally it shows only the status message, such as Standby or Camera found. Tap the footer to also show the three card slots with their type and minutes remaining. Tap it again to hide them.
-
-### Recording and timecode
-
-- **Record button**: the red dot starts recording and becomes a stop square while recording. The header reads STBY, REC or PLAY.
-- **Timecode**: the large readout turns red while recording. A TC badge marks the timecode view.
-- **Clip counter**: tap the timecode area, or the mode label (STBY, REC or PLAY) in the header, to switch between timecode and the camera's clip counter. During recording the counter follows the camera's own clip count and keeps its last value after you stop.
-
 ### Focus
 
 Tap **FOCUS** on the main screen to open the focus page.
@@ -179,27 +154,6 @@ Presets live on the SD card, so they survive power-off.
 | --- | --- |
 | `/presets/<date>_MagicPilot_Remote_Preset1.json`, `..._Preset2.json` | One JSON file per saved preset, for example `2026-10-05_MagicPilot_Remote_Preset1.json` |
 
-The date in the file name comes from the camera's clock. If the camera hasn't reported it, the file is saved without a date. Saving again replaces the slot's earlier file, even if the date has changed.
-
-A preset file looks like this. `date` and `time` are the camera's clock at the moment of saving, and are `null` if the camera hasn't reported them. `shutter_angle` is in degrees and `iris` is the camera's raw aperture value, or `null` when the lens doesn't report it:
-
-```json
-{
-  "description": "MagicPilot Preset",
-  "slot": 1,
-  "date": "2026-10-05",
-  "time": "14:32:10",
-  "iso": 800,
-  "shutter_angle": 180.00,
-  "fps": 24,
-  "white_balance": 5600,
-  "tint": 0,
-  "iris": 4096
-}
-```
-
-Presets saved by earlier versions in `/presets.txt` are not read.
-
 Without a card the remote still works, but saving and loading presets shows "No SD card".
 
 
@@ -208,12 +162,9 @@ Without a card the remote still works, but saving and loading presets shows "No 
 - `src/main.cpp`: the whole firmware (BLE client, camera protocol, UI).
 - `platformio.ini`: board, framework and library settings.
 
-Bluetooth uses the ESP-IDF Bluedroid API directly. Camera commands are fixed packet templates with the value bytes filled in at send time.
-
 ## Disclaimer
 
 ⚠️ Use at your own risk. MagicPilot is provided "as is" without warranty. The developer is not responsible or liable for damage, malfunction, loss of footage, data loss, or any other loss or damage to cameras, lenses, recording media, accessories, equipment, or property resulting from the use of this software or firmware. Always verify settings, compatibility, and operation before using MagicPilot with valuable or professional equipment.
 
 MagicPilot is an independent open-source project and is not affiliated with, endorsed by, or sponsored by Blackmagic Design Pty. Ltd.
 Blackmagic Design, Blackmagic Pocket Cinema Camera, BMPCC, and related names and trademarks are the property of Blackmagic Design Pty. Ltd.
-MagicPilot is developed independently for use with compatible Blackmagic cameras.
