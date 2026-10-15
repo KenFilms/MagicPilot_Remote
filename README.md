@@ -4,7 +4,7 @@
 
 ![BlackmagicCameraControl](https://img.shields.io/badge/BlackmagicCameraControl-Aug_2025-green) 
 ![arduino-esp32](https://img.shields.io/badge/arduino--esp32-2.0.17-green)
-![Platform](https://img.shields.io/badge/platform-M5Stack%20Core2-blue)
+![Platform](https://img.shields.io/badge/platform-M5Stack%20Core2%20%26%20CoreS3%2FSE-blue)
 ![MCU](https://img.shields.io/badge/MCU-ESP32-E7352C)
 ![Framework](https://img.shields.io/badge/framework-Arduino-00979D)
 ![Camera](https://img.shields.io/badge/camera-BMPCC6K-black)
@@ -17,7 +17,7 @@ https://github.com/user-attachments/assets/88d4dcbc-c6db-4bb7-9184-9daaf6ef9eb5
 
 [Watch the demo video](docs/video/MagicPilot_Remote.mp4)
 
-Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Camera 6K), running on an M5Stack Core2. It talks to the camera over Bluetooth LE using the Blackmagic Camera Control protocol.
+Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Camera 6K), running on an M5Stack Core2, CoreS3, or CoreS3-SE. It talks to the camera over Bluetooth LE using the Blackmagic Camera Control protocol.
 
 ## Table of contents
 
@@ -30,7 +30,6 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
     - [Arduino IDE](#arduino-ide)
     - [PaltformIO](#paltformio)
   - [Camera compatibility](#-camera-compatibility)
-  | ☀️ | **Automatic Brightness** | The CoreS3 adjusts its display backlight to ambient light; Core2 retains its default brightness. |
 - [Using the remote](#using-the-remote)
   - [Pairing](#pairing)
   - [Live readout and control](#live-readout-and-control)
@@ -55,6 +54,7 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
 | 🎛️ | **Parameter Control** | Tap a value, then use − / + to change it on the camera. |
 | 🎥 | **Record Control** | Start and stop recording with one button. |
 | 💾 | **Camera Presets** | Save and recall two complete camera configurations. |
+| ☀️ | **Automatic Brightness** | The CoreS3 adjusts its display backlight to ambient light; Core2 retains its default brightness. |
 
 
 ## Getting started
@@ -63,7 +63,7 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
 
 MagicPilot is designed around a small amount of readily available hardware:
 
-- **M5Stack Core2** — touchscreen remote and ESP32 platform
+- **M5Stack Core2, CoreS3, or CoreS3-SE** — touchscreen remote and ESP32 platform
 - **BMPCC6K** — with Bluetooth enabled
 - **microSD card** — optional; required for preset storage.
 
@@ -77,7 +77,7 @@ That's it.
 
 1. Install the ESP32/M5Stack board support package and the **M5Unified** and **M5GFX** libraries.
 2. Open `MagicPilot_Remote.ino`. Keep the folder name `MagicPilot_Remote` and the `src` folder next to it, because the firmware is in `src/main.cpp`.
-3. Select the **M5Stack Core2** or **M5Stack CoreS3** board to match your device.
+3. Select the **M5Stack Core2** board for Core2, or **M5Stack CoreS3** for CoreS3 and CoreS3-SE.
 4. Select the serial port and click Upload.
 
 #### PlatformIO
@@ -89,13 +89,15 @@ pio run -e m5stack-core2                         # build Core2
 pio run -e m5stack-core2 -t upload               # upload to Core2
 ```
 ```sh
-pio run -e m5stack-cores3                        # build CoreS3
-pio run -e m5stack-cores3 -t upload              # upload to CoreS3
+pio run -e m5stack-cores3                        # build CoreS3/CoreS3-SE
+pio run -e m5stack-cores3 -t upload              # upload to CoreS3/CoreS3-SE
 ```
 ```sh
 python3 scripts/upload_auto.py                   # detect board and upload
 pio device monitor                               # serial log at 115200 baud
 ```
+
+CoreS3-SE uses the same CoreS3 PlatformIO environment and is detected as a CoreS3-family device by the automatic uploader.
 
 | Camera | Status |
 |---|---|
