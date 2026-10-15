@@ -37,6 +37,7 @@
 
 #include "config.h"
 #include "globals.h"
+#include "ambient_brightness.h"
 #include "ble_protocol.h"
 #include "ble_connection.h"
 #include "ui_main_screen.h"
@@ -65,11 +66,14 @@ static void seekFirstFreeCaptureIndex() {
 
 // Initializes the display and SD card, starts Bluetooth, and draws the main screen.
 void setup() {
-    M5.begin(true, true, true, true);
+    auto m5Config = M5.config();
+    m5Config.serial_baudrate = 115200;
+    M5.begin(m5Config);
     M5.Lcd.setRotation(1);
     M5.Lcd.setTextFont(1);
     M5.Lcd.setTextSize(1);
     Serial.begin(115200);
+    initializeAmbientBrightness();
     sdReady = mountSd();
     Serial.printf("[SD] %s, card type %d, %llu MB\n", sdReady ? "mounted" : "not mounted", (int)SD.cardType(), SD.cardSize() / (1024ULL * 1024ULL));
     if (sdReady && CAPTURE_SCREENSHOTS) seekFirstFreeCaptureIndex();
@@ -96,8 +100,8 @@ static void replyWithEnteredPin() {
 // Dispatches the current touch, repeating it while a stepper or the focus slider is held.
 static void handleTouchInput() {
     // The INT pin can go low before the controller is read; that stale point is (-1,-1) and must not consume the tap.
-    const TouchPoint_t point = M5.Touch.getPressPoint();
-    const bool touchDown = M5.Touch.ispressed() && point.x >= 0 && point.y >= 0;
+    const auto& point = M5.Touch.getDetail();
+    const bool touchDown = M5.Touch.getCount() > 0 && point.isPressed() && point.x >= 0 && point.y >= 0;
     if (touchDown) {
         const uint32_t now = millis();
         if (!touchWasDown) Serial.printf("[TOUCH] down x=%d y=%d\n", point.x, point.y);
@@ -114,6 +118,7 @@ static void handleTouchInput() {
 // Applies dirty-flag redraws, answers the pairing PIN, handles touch, and saves queued screenshots.
 void loop() {
     M5.update();
+    updateAmbientBrightness();
     updateDirtyDisplay();
     updateRemoteBattery();
     advancePresetLoad();

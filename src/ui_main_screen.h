@@ -5,20 +5,25 @@
 #include "config.h"
 #include "globals.h"
 
+static int displayTextWidth(const char* text, uint8_t font) {
+    M5.Lcd.setTextFont(font);
+    return M5.Lcd.textWidth(text);
+}
+
 // Draws centred text with extra pixels between the letters.
 static void drawSpacedString(const char* text, int centerX, int centerY, uint8_t font, int spacing) {
     const int count = (int)strlen(text);
     int total = spacing * (count - 1);
     for (int i = 0; i < count; ++i) {
         const char glyph[2] = {text[i], '\0'};
-        total += M5.Lcd.textWidth(glyph, font);
+        total += displayTextWidth(glyph, font);
     }
     int x = centerX - total / 2;
     M5.Lcd.setTextDatum(ML_DATUM);
     for (int i = 0; i < count; ++i) {
         const char glyph[2] = {text[i], '\0'};
         M5.Lcd.drawString(glyph, x, centerY, font);
-        x += M5.Lcd.textWidth(glyph, font) + spacing;
+        x += displayTextWidth(glyph, font) + spacing;
     }
 }
 
@@ -79,7 +84,7 @@ static void drawCell(int x, int y, int w, int h, const char* title, const char* 
     M5.Lcd.drawString(title, x + 6, y + 4, 1);
     // No background colour: the free font's fill box is taller than the text and would erase the bottom border.
     M5.Lcd.setTextColor(WHITE);
-    M5.Lcd.setFreeFont(FSS9);
+    M5.Lcd.setFreeFont(&fonts::FreeSans9pt7b);
     M5.Lcd.drawString(value, x + 6, y + 16);
     if (degree) M5.Lcd.drawCircle(x + 6 + M5.Lcd.textWidth(value) + 4, y + 19, 2, WHITE);
     M5.Lcd.setFreeFont(nullptr);
@@ -186,7 +191,7 @@ static void drawTimecode() {
     M5.Lcd.setTextColor(color, BLACK);
     M5.Lcd.setTextDatum(MC_DATUM);
     M5.Lcd.setTextPadding(0);
-    M5.Lcd.setFreeFont(FSS9);
+    M5.Lcd.setFreeFont(&fonts::FreeSans9pt7b);
     int cellX = TIMECODE_LEFT;
     for (int index = 0; index < TIMECODE_CHARS && text[index] != '\0'; ++index) {
         const int cellWidth = text[index] == ':' ? TIMECODE_COLON_CELL : TIMECODE_DIGIT_CELL;
@@ -206,12 +211,12 @@ static void drawTimecode() {
 
 // Right edge of the Core2 battery icon (including its tip) and left edge of the Cam label.
 static int coreBatteryRight() {
-    return 8 + M5.Lcd.textWidth("MagicPilot", 2) + 6 + 37;
+    return 8 + displayTextWidth("MagicPilot", 2) + 6 + 37;
 }
 
 // Left edge of the Camera label, which the voltage readout clears up to.
 static int camLabelLeft() {
-    return 237 - M5.Lcd.textWidth("Camera", 2);
+    return 237 - displayTextWidth("Camera", 2);
 }
 
 // Battery pill (34x14 rounded box with a tip), 7 px down from the top, with text centred inside.
@@ -259,7 +264,7 @@ static uint32_t lastBatteryReadMs = 0;  // the AXP is only polled every 10 s
 // The Core2's own battery as a small icon with the percentage inside, next to the title.
 static void drawRemoteBattery() {
     if (remoteBatteryPercent < 0) return;
-    const int x = 8 + M5.Lcd.textWidth("MagicPilot", 2) + 6;
+    const int x = 8 + displayTextWidth("MagicPilot", 2) + 6;
     char text[6];
     snprintf(text, sizeof(text), "%d%%", remoteBatteryPercent);
     const uint16_t color = remoteCharging ? UI_GREEN : (remoteBatteryPercent < 15 ? RED : WHITE);
@@ -272,8 +277,8 @@ static void updateRemoteBattery() {
     const uint32_t now = millis();
     if (remoteBatteryPercent >= 0 && now - lastBatteryReadMs < 10000) return;
     lastBatteryReadMs = now;
-    const int percent = constrain((int)(M5.Axp.GetBatteryLevel() + 0.5f), 0, 100);
-    const bool charging = M5.Axp.isCharging();
+    const int percent = constrain((int)(M5.Power.getBatteryLevel() + 0.5f), 0, 100);
+    const bool charging = M5.Power.isCharging();
     if (percent == remoteBatteryPercent && charging == remoteCharging) return;
     remoteBatteryPercent = percent;
     remoteCharging = charging;
@@ -310,7 +315,7 @@ static void drawTopBar() {
     drawTitleBar();
     const char* cameraMode = !cameraConnected ? "STBY" : transportMode == 2 ? "REC" : transportMode == 1 ? "PLAY" : "STBY";
     if (transportMode == 2 && cameraConnected) {
-        const int recWidth = M5.Lcd.textWidth("REC", 2);
+        const int recWidth = displayTextWidth("REC", 2);
         const int groupLeft = modeCenterX() - (10 + 6 + recWidth) / 2;
         M5.Lcd.fillCircle(groupLeft + 5, 14, 5, RED);
         M5.Lcd.setTextColor(RED, UI_BAR);
@@ -376,7 +381,7 @@ static void drawSlotCell(uint8_t slot, int x0) {
     } else {
         const char* name = medium == 2 ? "SSD" : "--";
         M5.Lcd.drawString(name, cursor, centerY, 1);
-        cursor += M5.Lcd.textWidth(name, 1);
+        cursor += displayTextWidth(name, 1);
     }
     cursor += 4;
 
@@ -385,7 +390,7 @@ static void drawSlotCell(uint8_t slot, int x0) {
     if (seconds >= 0 && (seconds > 0 || active)) snprintf(minutes, sizeof(minutes), "%ld", (long)(seconds / 60));
     M5.Lcd.setTextDatum(ML_DATUM);
     M5.Lcd.drawString(minutes, cursor, centerY, 2);
-    cursor += M5.Lcd.textWidth(minutes, 2) + 2;
+    cursor += displayTextWidth(minutes, 2) + 2;
     M5.Lcd.drawString("min", cursor, centerY, 1);
 }
 
@@ -432,7 +437,7 @@ static void drawStatus() {
     M5.Lcd.drawFastHLine(0, 205, 320, GREY);
     M5.Lcd.setTextColor(WHITE, UI_BAR);
     M5.Lcd.setTextDatum(MC_DATUM);
-    const uint8_t font = M5.Lcd.textWidth(statusMessage, 2) <= 304 ? 2 : 1;
+    const uint8_t font = displayTextWidth(statusMessage, 2) <= 304 ? 2 : 1;
     M5.Lcd.drawString(statusMessage, 160, footerExpanded ? 214 : 223, font);
     drawSlots();
 }

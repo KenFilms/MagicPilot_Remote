@@ -41,7 +41,8 @@ static Preset presets[PRESET_COUNT] = {};  // slots as last read from the card
 static bool mountSd() {
     if (SD.cardType() != CARD_NONE) return true;
     SD.end();
-    return SD.begin(TFCARD_CS_PIN, SPI, 25000000) || SD.begin(TFCARD_CS_PIN, SPI, 10000000);
+    SPI.begin(SD_SPI_SCK_PIN, SD_SPI_MISO_PIN, SD_SPI_MOSI_PIN, SD_CARD_CS_PIN);
+    return SD.begin(SD_CARD_CS_PIN, SPI, 25000000) || SD.begin(SD_CARD_CS_PIN, SPI, 10000000);
 }
 
 // Finds the newest file of a slot; names start with the date, so the greatest name is the newest.

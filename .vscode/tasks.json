@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Upload: detect M5Stack board",
+      "type": "process",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/upload_auto.py"],
+      "problemMatcher": []
+    }
+  ]
+}

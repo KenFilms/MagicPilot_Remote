@@ -30,6 +30,7 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
     - [Arduino IDE](#arduino-ide)
     - [PaltformIO](#paltformio)
   - [Camera compatibility](#-camera-compatibility)
+  | ☀️ | **Automatic Brightness** | The CoreS3 adjusts its display backlight to ambient light; Core2 retains its default brightness. |
 - [Using the remote](#using-the-remote)
   - [Pairing](#pairing)
   - [Live readout and control](#live-readout-and-control)
@@ -37,9 +38,6 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
   - [Presets](#presets)
   - [SD card](#sd-card)
 - [Project layout](#project-layout)
-- [Disclaimer](#disclaimer)
-
-## Overview
 
 ### Why MagicPilot?
 
@@ -77,22 +75,27 @@ That's it.
 
 #### Arduino IDE
 
-1. Install the **esp32 by Espressif Systems** board package, version **2.0.17**, and the **M5Core2** library (0.1.6 or newer) from the Library Manager.
+1. Install the ESP32/M5Stack board support package and the **M5Unified** and **M5GFX** libraries.
 2. Open `MagicPilot_Remote.ino`. Keep the folder name `MagicPilot_Remote` and the `src` folder next to it, because the firmware is in `src/main.cpp`.
-3. Select the board **M5Stack-Core2** and a partition scheme with at least 1.5 MB of app space (for example **16M Flash (3MB APP/9.9MB FATFS)**).
+3. Select the **M5Stack Core2** or **M5Stack CoreS3** board to match your device.
 4. Select the serial port and click Upload.
 
-#### PaltformIO
+#### PlatformIO
 
-Requires [PlatformIO](https://platformio.org/).
+Requires [PlatformIO](https://platformio.org/). Build or upload a specific board with its environment:
 
 ```sh
-pio run -e m5stack-core2              # build
-pio run -e m5stack-core2 -t upload    # build and flash
-pio device monitor                    # serial log at 115200 baud
+pio run -e m5stack-core2                         # build Core2
+pio run -e m5stack-core2 -t upload               # upload to Core2
 ```
-
-### 🎥 Camera compatibility
+```sh
+pio run -e m5stack-cores3                        # build CoreS3
+pio run -e m5stack-cores3 -t upload              # upload to CoreS3
+```
+```sh
+python3 scripts/upload_auto.py                   # detect board and upload
+pio device monitor                               # serial log at 115200 baud
+```
 
 | Camera | Status |
 |---|---|
@@ -106,8 +109,6 @@ pio device monitor                    # serial log at 115200 baud
 ### Pairing
 
 1. On the camera, open the Bluetooth setup menu and switch on Bluetooth.
-2. On the remote, tap the CONNECT button. The button reads SEARCH while it looks for the camera.
-3. Enter the 6-digit PIN shown on the camera on the keypad and tap OK.
 
 The button then reads ONLINE. The status bar at the bottom shows the connection state, and the Bluetooth icon in the header turns blue when connected.
 

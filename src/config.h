@@ -2,7 +2,8 @@
 
 // Shared includes, constants, colours and small value types used across the firmware.
 
-#include <M5Core2.h>
+#include <M5Unified.h>
+#include <SPI.h>
 #include <esp32-hal-bt.h>
 #include <esp_bt.h>
 #include <esp_bt_main.h>
@@ -12,6 +13,20 @@
 #include <SD.h>
 #include <stdio.h>
 #include <string.h>
+
+#if defined(ARDUINO_M5STACK_CORES3)
+static const int SD_CARD_CS_PIN = 4;
+static const int SD_SPI_SCK_PIN = 36;
+static const int SD_SPI_MISO_PIN = 35;
+static const int SD_SPI_MOSI_PIN = 37;
+#elif defined(ARDUINO_M5STACK_Core2)
+static const int SD_CARD_CS_PIN = 4;
+static const int SD_SPI_SCK_PIN = 18;
+static const int SD_SPI_MISO_PIN = 38;
+static const int SD_SPI_MOSI_PIN = 23;
+#else
+#error Unsupported M5Stack board
+#endif
 
 // 0 = never write UI screenshots to the SD card (and don't create /ui_captures). Leave default value 0!!! It will slow down the UI if set to 1.
 static const uint8_t CAPTURE_SCREENSHOTS = 0;
