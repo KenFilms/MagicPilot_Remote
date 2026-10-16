@@ -120,8 +120,6 @@
     .card { background: var(--panel); border: 1px solid #2a2a50; border-radius: 12px; padding: 18px; }
     .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
     .card p { margin: 0; color: var(--muted); }
-    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .shots img { image-rendering: pixelated; width: 100%; }
     table { width: 100%; border-collapse: collapse; }
     th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #2a2a50; }
     details { background: var(--panel); border: 1px solid #2a2a50; border-radius: 8px; padding: 12px 16px; margin: 10px 0; }
@@ -170,21 +168,13 @@
       </video>
     </section>
 
-    <section id="screenshots">
-      <h2>Screenshots</h2>
+    <section id="presets">
+      <h2>Camera presets</h2>
       <figure>
         <img src="images/MagicPilot_Remote_Presets.jpg" width="1500" height="870" loading="lazy"
              alt="MagicPilot Remote presets screen with save, load and clear buttons for two Blackmagic camera presets">
         <figcaption>Two preset slots store ISO, shutter, FPS, white balance, tint and iris.</figcaption>
       </figure>
-      <div class="shots">
-        <img src="images/main-iris.png" width="320" height="240" loading="lazy" alt="Main screen with iris selected for adjustment on a Blackmagic camera">
-        <img src="images/main-shutter.png" width="320" height="240" loading="lazy" alt="Main screen with shutter angle selected for adjustment">
-        <img src="images/main-white-balance.png" width="320" height="240" loading="lazy" alt="Main screen with white balance in Kelvin selected for adjustment">
-        <img src="images/focus.png" width="320" height="240" loading="lazy" alt="Focus page with NEAR to FAR slider, minus and plus buttons and autofocus button">
-        <img src="images/recording.png" width="320" height="240" loading="lazy" alt="Main screen while the Blackmagic camera is recording">
-        <img src="images/preset-saved.png" width="320" height="240" loading="lazy" alt="Main screen showing a Preset 1 saved confirmation in the status bar">
-      </div>
     </section>
 
     <section id="hardware">

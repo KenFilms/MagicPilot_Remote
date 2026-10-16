@@ -134,17 +134,17 @@ The main screen shows the camera's settings as they change. To adjust one, tap i
 
 | Parameter | Readout | Control with - / + |
 | --- | --- | --- |
-| ISO | Current ISO | Fixed steps from 100 to 25600 |
-| Shutter | Angle in degrees | Fixed steps from 11.2 to 360 degrees |
-| FPS | Recording frame rate | Steps from 5 to 120 |
-| White balance | Kelvin | 50 K steps, 2500 to 10000 K |
-| Tint | Signed value | 1 step, -50 to +50 |
+| ISO | Current value | ISO 100 – ISO 25,600 |
+| Shutter | Angle | 11.2–360° |
+| FPS | Frame rate | 5–120 fps |
+| White balance | Kelvin | 2,500–10,000 K (50 K steps) |
+| Tint | Signed value | −50 to +50 (1-step) |
 | Iris | f-number | One lens stop per tap |
-| Timecode | Timecode or clip counter | Tap it to switch between the two |
-| Record | STBY / REC / PLAY in the middle of the header | Record button |
-| Camera battery | Voltage inside the battery icon after the "Camera" label, red below 6.8 V (tap the header to show) | Read only |
-| Remote battery | The Core2's own charge in the icon next to the title, red below 15%, green while charging (tap the header to show) | Read only |
-| Storage Cards | Type, minutes left and the active slot in the footer (tap the footer to show) | Read only |
+| Timecode | Timecode or clip counter | Tap to switch |
+| Record | STBY / REC / PLAY | Record button |
+| Camera battery | Voltage (tap header to show) | Read only; red below 6.8 V |
+| Remote battery | Charge (tap header to show) | Read only; red below 15%, green while charging |
+| Storage cards | Type, remaining time, active slot (tap footer to show) | Read only |
 
 Iris changes can only reach lenses the camera can drive.
 
