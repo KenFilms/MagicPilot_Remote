@@ -75,12 +75,19 @@ That's it.
 
 #### Arduino IDE
 
+> [!NOTE]
+> The Arduino IDE does not autodetect the board. You must select the matching board yourself before uploading. Automatic detection is only available with PlatformIO via `scripts/upload_auto.py`.
+
 1. Install the ESP32/M5Stack board support package and the **M5Unified** and **M5GFX** libraries.
+   For CoreS3/CoreS3-SE, also install the **LTR5XX** ambient light sensor library: download [LTR5XX.zip](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1205/LTR5XX.zip) and add it via *Sketch → Include Library → Add .ZIP Library…*.
 2. Open `MagicPilot_Remote.ino`. Keep the folder name `MagicPilot_Remote` and the `src` folder next to it, because the firmware is in `src/main.cpp`.
 3. Select the **M5Stack Core2** board for Core2, or **M5Stack CoreS3** for CoreS3 and CoreS3-SE.
 4. Select the serial port and click Upload.
 
 #### PlatformIO
+
+> [!NOTE]
+> With PlatformIO, run `python3 scripts/upload_auto.py` to automatically detect the connected Core2 or CoreS3/CoreS3-SE and upload the matching firmware. Connect exactly one supported device. Regular `pio run` commands do not auto-detect the board; they use the selected environment.
 
 Requires [PlatformIO](https://platformio.org/). Build or upload a specific board with its environment:
 
@@ -149,8 +156,8 @@ Focus changes only reach lenses the camera can drive.
 Tap **PRESETS** on the main screen. The page has two slots, each with its own **SAVE**, **LOAD** and **CLEAR** button and a short summary of what it holds.
 
 - **SAVE**: stores ISO, shutter, FPS, white balance, tint and iris as they are on the camera.
-- **LOAD**: sends the stored values to the camera. The iris is stepped to the stored f-number one stop at a time, so loading takes a moment.
-- **CLEAR**: needs two taps. The first turns the button red and shows "SURE?"; any other tap cancels.
+- **LOAD**: sends the stored values to the camera. The iris is stepped to the stored f-number.
+- **CLEAR**: needs two taps to clear.
 - **BACK**: returns to the main screen.
 
 Presets live on the SD card, so they survive power-off.

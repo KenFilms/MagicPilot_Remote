@@ -19,7 +19,7 @@ static const int SD_CARD_CS_PIN = 4;
 static const int SD_SPI_SCK_PIN = 36;
 static const int SD_SPI_MISO_PIN = 35;
 static const int SD_SPI_MOSI_PIN = 37;
-#elif defined(ARDUINO_M5STACK_Core2)
+#elif defined(ARDUINO_M5STACK_Core2) || defined(ARDUINO_M5STACK_CORE2)  // arduino-esp32 2.x / 3.x and M5Stack package
 static const int SD_CARD_CS_PIN = 4;
 static const int SD_SPI_SCK_PIN = 18;
 static const int SD_SPI_MISO_PIN = 38;
