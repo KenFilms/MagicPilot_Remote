@@ -1,6 +1,8 @@
-# ✨ MagicPilot Remote
+# ✨ MagicPilot Remote: Bluetooth Remote for the Blackmagic Pocket Cinema Camera 6K
 
-### 🎬 A tiny touchscreen remote for the BMPCC6K.
+### 🎬 A tiny open-source touchscreen remote for the BMPCC6K, built on ESP32 / M5Stack.
+
+🌐 **Website:** [kenfilms.github.io/MagicPilot_Remote](https://kenfilms.github.io/MagicPilot_Remote/)
 
 ![BlackmagicCameraControl](https://img.shields.io/badge/BlackmagicCameraControl-Aug_2025-green) 
 ![arduino-esp32](https://img.shields.io/badge/arduino--esp32-2.0.17-green)
@@ -9,15 +11,15 @@
 ![Framework](https://img.shields.io/badge/framework-Arduino-00979D)
 ![Camera](https://img.shields.io/badge/camera-BMPCC6K-black)
 
-![MagicPilot Remote overview](docs/images/MagicPilot_Remote_Overview.jpg)
+![MagicPilot Remote on an M5Stack Core2 showing live ISO, shutter angle, FPS, white balance, tint, iris and timecode from a Blackmagic Pocket Cinema Camera 6K](docs/images/MagicPilot_Remote_Overview.jpg)
 
-![MagicPilot Remote presets](docs/images/MagicPilot_Remote_Presets.jpg)
+![MagicPilot Remote presets screen with save, load and clear buttons for two Blackmagic camera presets](docs/images/MagicPilot_Remote_Presets.jpg)
 
 https://github.com/user-attachments/assets/88d4dcbc-c6db-4bb7-9184-9daaf6ef9eb5
 
-[Watch the demo video](docs/video/MagicPilot_Remote.mp4)
+[Watch the MagicPilot Remote demo video](docs/video/MagicPilot_Remote.mp4)
 
-Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Camera 6K), running on an M5Stack Core2, CoreS3, or CoreS3-SE. It talks to the camera over Bluetooth LE using the Blackmagic Camera Control protocol.
+**MagicPilot Remote** is a free, open-source wireless remote control for Blackmagic cameras, tested with the **Blackmagic Pocket Cinema Camera 6K (BMPCC6K)**. The firmware runs on an ESP32-based **M5Stack Core2, CoreS3, or CoreS3-SE** touchscreen and talks to the camera directly over **Bluetooth Low Energy (BLE)** using the official **Blackmagic Camera Control** protocol. You can pull focus, trigger autofocus, change ISO, shutter angle, frame rate, white balance, tint and iris, start and stop recording, and save camera presets without a phone, a Wi-Fi network, or the Blackmagic Camera app.
 
 ## Table of contents
 
@@ -28,7 +30,7 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
   - [Hardware](#-hardware)
   - [Build and flash](#build-and-flash)
     - [Arduino IDE](#arduino-ide)
-    - [PaltformIO](#paltformio)
+    - [PlatformIO](#platformio)
   - [Camera compatibility](#-camera-compatibility)
 - [Using the remote](#using-the-remote)
   - [Pairing](#pairing)
@@ -36,7 +38,10 @@ Touchscreen remote for Blackmagic cameras (tested against the Pocket Cinema Came
   - [Focus](#focus)
   - [Presets](#presets)
   - [SD card](#sd-card)
+- [FAQ](#faq)
 - [Project layout](#project-layout)
+
+## Overview
 
 ### Why MagicPilot?
 
@@ -106,6 +111,8 @@ pio device monitor                               # serial log at 115200 baud
 
 CoreS3-SE uses the same CoreS3 PlatformIO environment and is detected as a CoreS3-family device by the automatic uploader.
 
+### 📷 Camera compatibility
+
 | Camera | Status |
 |---|---|
 | Blackmagic Pocket Cinema Camera 6K | 🟢 Supported |
@@ -169,6 +176,23 @@ Presets live on the SD card, so they survive power-off.
 | `/presets/<date>_MagicPilot_Remote_Preset1.json`, `..._Preset2.json` | One JSON file per saved preset, for example `2026-10-05_MagicPilot_Remote_Preset1.json` |
 
 Without a card the remote still works, but saving and loading presets shows "No SD card".
+
+## FAQ
+
+**How do I control a Blackmagic Pocket Cinema Camera 6K remotely without a phone?**
+Flash MagicPilot onto an M5Stack Core2, CoreS3, or CoreS3-SE and switch on Bluetooth on the camera. The remote connects directly over Bluetooth LE, so you don't need a phone, tablet, Wi-Fi network, or the Blackmagic Camera app.
+
+**Can MagicPilot pull focus on a BMPCC6K?**
+Yes. The focus page has a NEAR → FAR slider, − / + buttons in 1% steps, and a one-shot autofocus (AF) button. It works with lenses the camera can drive electronically.
+
+**Which Blackmagic cameras are supported?**
+The Blackmagic Pocket Cinema Camera 6K is tested. Other cameras that implement the Blackmagic Camera Control Bluetooth protocol, such as the BMPCC 6K G2, 6K Pro and 4K, may work but haven't been tested yet. See [Camera compatibility](#-camera-compatibility).
+
+**What hardware do I need?**
+An M5Stack Core2, CoreS3, or CoreS3-SE (ESP32 touchscreen modules) and optionally a microSD card for presets. See [Hardware](#-hardware).
+
+**Is MagicPilot free?**
+Yes. It is open-source firmware licensed under the [LGPL-3.0](LICENSE).
 
 
 ## Project layout

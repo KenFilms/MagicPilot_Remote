@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MagicPilot Remote – Bluetooth Remote for Blackmagic BMPCC6K (ESP32 / M5Stack)</title>
+  <meta name="description" content="Free open-source touchscreen Bluetooth remote for the Blackmagic Pocket Cinema Camera 6K. Pull focus, change ISO, shutter, white balance and iris, record and save presets from an M5Stack Core2 or CoreS3.">
+  <meta name="keywords" content="Blackmagic remote, BMPCC6K remote, Blackmagic Pocket Cinema Camera 6K Bluetooth remote, Blackmagic Camera Control, ESP32 camera remote, M5Stack Core2, M5Stack CoreS3, wireless focus remote, open source camera remote">
+  <meta name="author" content="KenFilms">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="canonical" href="https://kenfilms.github.io/MagicPilot_Remote/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MagicPilot Remote">
+  <meta property="og:title" content="MagicPilot Remote – Bluetooth Remote for the Blackmagic BMPCC6K">
+  <meta property="og:description" content="Open-source touchscreen remote for the Blackmagic Pocket Cinema Camera 6K. Focus, exposure, recording and presets over Bluetooth LE from an M5Stack Core2 or CoreS3.">
+  <meta property="og:url" content="https://kenfilms.github.io/MagicPilot_Remote/">
+  <meta property="og:image" content="https://kenfilms.github.io/MagicPilot_Remote/images/social-preview.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="MagicPilot Remote touchscreen showing live Blackmagic camera settings">
+  <meta property="og:video" content="https://kenfilms.github.io/MagicPilot_Remote/video/MagicPilot_Remote.mp4">
+  <meta property="og:video:type" content="video/mp4">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MagicPilot Remote – Bluetooth Remote for the Blackmagic BMPCC6K">
+  <meta name="twitter:description" content="Open-source touchscreen remote for the Blackmagic Pocket Cinema Camera 6K, built on ESP32 / M5Stack.">
+  <meta name="twitter:image" content="https://kenfilms.github.io/MagicPilot_Remote/images/social-preview.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://kenfilms.github.io/MagicPilot_Remote/#software",
+        "name": "MagicPilot Remote",
+        "alternateName": ["MagicPilot", "MagicPilot_Remote"],
+        "description": "Open-source touchscreen Bluetooth LE remote control firmware for the Blackmagic Pocket Cinema Camera 6K (BMPCC6K), running on ESP32-based M5Stack Core2, CoreS3 and CoreS3-SE devices.",
+        "url": "https://kenfilms.github.io/MagicPilot_Remote/",
+        "downloadUrl": "https://github.com/KenFilms/MagicPilot_Remote",
+        "applicationCategory": "MultimediaApplication",
+        "applicationSubCategory": "Camera remote control",
+        "operatingSystem": "ESP32 (M5Stack Core2, CoreS3, CoreS3-SE)",
+        "image": "https://kenfilms.github.io/MagicPilot_Remote/images/MagicPilot_Remote_Overview.jpg",
+        "screenshot": "https://kenfilms.github.io/MagicPilot_Remote/images/MagicPilot_Remote_Presets.jpg",
+        "license": "https://www.gnu.org/licenses/lgpl-3.0.html",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Organization", "name": "KenFilms", "url": "https://github.com/KenFilms" },
+        "featureList": [
+          "Focus control with NEAR to FAR slider and one-shot autofocus",
+          "Live readout of ISO, shutter angle, FPS, white balance, tint, iris and timecode",
+          "Change camera settings with - / + buttons",
+          "Start and stop recording",
+          "Save and recall two camera presets on microSD",
+          "Automatic display brightness on CoreS3"
+        ]
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "MagicPilot Remote source code",
+        "codeRepository": "https://github.com/KenFilms/MagicPilot_Remote",
+        "programmingLanguage": ["C++", "Arduino"],
+        "runtimePlatform": "ESP32",
+        "license": "https://www.gnu.org/licenses/lgpl-3.0.html",
+        "targetProduct": { "@id": "https://kenfilms.github.io/MagicPilot_Remote/#software" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I control a Blackmagic Pocket Cinema Camera 6K remotely without a phone?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Flash MagicPilot onto an M5Stack Core2, CoreS3 or CoreS3-SE and switch on Bluetooth on the camera. The remote connects directly over Bluetooth LE, so you don't need a phone, tablet, Wi-Fi network or the Blackmagic Camera app." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can MagicPilot pull focus on a BMPCC6K?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. The focus page has a NEAR to FAR slider, - / + buttons in 1% steps and a one-shot autofocus button. It works with lenses the camera can drive electronically." }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Blackmagic cameras are supported?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Blackmagic Pocket Cinema Camera 6K is tested. Other cameras that implement the Blackmagic Camera Control Bluetooth protocol, such as the BMPCC 6K G2, 6K Pro and 4K, may work but haven't been tested yet." }
+          },
+          {
+            "@type": "Question",
+            "name": "What hardware do I need?",
+            "acceptedAnswer": { "@type": "Answer", "text": "An M5Stack Core2, CoreS3 or CoreS3-SE ESP32 touchscreen module, and optionally a microSD card for presets." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is MagicPilot free?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. MagicPilot is open-source firmware licensed under the LGPL-3.0." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root { --bg: #0a0a1a; --panel: #12122a; --text: #e8e8f0; --muted: #a0a0b8; --accent: #4d6bff; --rec: #ff6a1a; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: #8fa2ff; }
+    header, main, footer { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    header { padding-top: 48px; text-align: center; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin: 0 0 12px; }
+    h2 { margin-top: 56px; border-bottom: 1px solid #2a2a50; padding-bottom: 6px; }
+    .lead { font-size: 1.15rem; color: var(--muted); max-width: 720px; margin: 0 auto 24px; }
+    .btn { display: inline-block; margin: 6px; padding: 12px 22px; border-radius: 8px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }
+    .btn.secondary { background: transparent; border: 1px solid var(--accent); color: var(--text); }
+    img, video { max-width: 100%; height: auto; border-radius: 12px; display: block; }
+    figure { margin: 32px 0; }
+    figcaption { color: var(--muted); font-size: .9rem; text-align: center; margin-top: 8px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .card { background: var(--panel); border: 1px solid #2a2a50; border-radius: 12px; padding: 18px; }
+    .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); }
+    .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .shots img { image-rendering: pixelated; width: 100%; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #2a2a50; }
+    details { background: var(--panel); border: 1px solid #2a2a50; border-radius: 8px; padding: 12px 16px; margin: 10px 0; }
+    summary { cursor: pointer; font-weight: 600; }
+    footer { margin-top: 64px; padding-bottom: 40px; color: var(--muted); font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MagicPilot Remote: Bluetooth Touchscreen Remote for the Blackmagic Pocket Cinema Camera 6K</h1>
+    <p class="lead">A free, open-source wireless remote for the <strong>BMPCC6K</strong>, built on an ESP32-based <strong>M5Stack Core2, CoreS3 or CoreS3-SE</strong>. Pull focus, change exposure, start recording and recall presets over <strong>Bluetooth LE</strong>. No phone, no Wi-Fi, no app.</p>
+    <a class="btn" href="https://github.com/KenFilms/MagicPilot_Remote">View on GitHub</a>
+    <a class="btn secondary" href="https://github.com/KenFilms/MagicPilot_Remote#build-and-flash">Build &amp; flash guide</a>
+  </header>
+
+  <main>
+    <figure>
+      <img src="images/MagicPilot_Remote_Overview.jpg" width="1500" height="1156" fetchpriority="high"
+           alt="MagicPilot Remote on an M5Stack Core2 showing live ISO, shutter angle, FPS, white balance, tint, iris and timecode from a Blackmagic Pocket Cinema Camera 6K">
+      <figcaption>MagicPilot Remote main screen with a live readout of the Blackmagic camera's settings.</figcaption>
+    </figure>
+
+    <section id="why">
+      <h2>Why use a Bluetooth remote for your Blackmagic camera?</h2>
+      <p><strong>Next to your external monitor.</strong> An external monitor is brighter than the camera's built-in screen, so that is where you look. MagicPilot mounts right beside it, so the settings are in your line of sight.</p>
+      <p><strong>When the camera is out of reach.</strong> With the camera against a wall or mounted very high, such as on a crane or jib, the remote changes settings and starts or stops recording from wherever you stand.</p>
+    </section>
+
+    <section id="features">
+      <h2>Features</h2>
+      <div class="grid">
+        <div class="card"><h3>🔭 Wireless focus control</h3><p>NEAR → FAR slider, 1% steps and one-shot autofocus.</p></div>
+        <div class="card"><h3>📊 Live camera readout</h3><p>ISO, shutter angle, FPS, white balance, tint, iris, timecode, battery and card status.</p></div>
+        <div class="card"><h3>🎛️ Exposure control</h3><p>Tap a value, then use − / + to change it on the camera.</p></div>
+        <div class="card"><h3>🎥 Record start / stop</h3><p>Start and stop recording with one button.</p></div>
+        <div class="card"><h3>💾 Camera presets</h3><p>Save and recall two complete camera configurations on microSD.</p></div>
+        <div class="card"><h3>☀️ Automatic brightness</h3><p>The CoreS3 adapts its backlight to ambient light.</p></div>
+      </div>
+    </section>
+
+    <section id="video">
+      <h2>Demo video</h2>
+      <video controls preload="none" playsinline poster="images/social-preview.jpg" width="1280" height="640">
+        <source src="video/MagicPilot_Remote.mp4" type="video/mp4">
+        <a href="video/MagicPilot_Remote.mp4">Download the MagicPilot Remote demo video</a>.
+      </video>
+    </section>
+
+    <section id="screenshots">
+      <h2>Screenshots</h2>
+      <figure>
+        <img src="images/MagicPilot_Remote_Presets.jpg" width="1500" height="870" loading="lazy"
+             alt="MagicPilot Remote presets screen with save, load and clear buttons for two Blackmagic camera presets">
+        <figcaption>Two preset slots store ISO, shutter, FPS, white balance, tint and iris.</figcaption>
+      </figure>
+      <div class="shots">
+        <img src="images/main-iris.png" width="320" height="240" loading="lazy" alt="Main screen with iris selected for adjustment on a Blackmagic camera">
+        <img src="images/main-shutter.png" width="320" height="240" loading="lazy" alt="Main screen with shutter angle selected for adjustment">
+        <img src="images/main-white-balance.png" width="320" height="240" loading="lazy" alt="Main screen with white balance in Kelvin selected for adjustment">
+        <img src="images/focus.png" width="320" height="240" loading="lazy" alt="Focus page with NEAR to FAR slider, minus and plus buttons and autofocus button">
+        <img src="images/recording.png" width="320" height="240" loading="lazy" alt="Main screen while the Blackmagic camera is recording">
+        <img src="images/preset-saved.png" width="320" height="240" loading="lazy" alt="Main screen showing a Preset 1 saved confirmation in the status bar">
+      </div>
+    </section>
+
+    <section id="hardware">
+      <h2>Hardware</h2>
+      <ul>
+        <li><strong>M5Stack Core2, CoreS3 or CoreS3-SE</strong>: ESP32 touchscreen module that runs the firmware</li>
+        <li><strong>Blackmagic Pocket Cinema Camera 6K</strong> with Bluetooth enabled</li>
+        <li><strong>microSD card</strong> (optional, for presets)</li>
+      </ul>
+      <p>Build and flash with the <a href="https://github.com/KenFilms/MagicPilot_Remote#arduino-ide">Arduino IDE</a> or <a href="https://github.com/KenFilms/MagicPilot_Remote#platformio">PlatformIO</a>.</p>
+    </section>
+
+    <section id="compatibility">
+      <h2>Camera compatibility</h2>
+      <table>
+        <thead><tr><th>Camera</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Blackmagic Pocket Cinema Camera 6K (BMPCC6K)</td><td>🟢 Supported</td></tr>
+          <tr><td>Blackmagic Pocket Cinema Camera 6K G2</td><td>🟡 Not tested</td></tr>
+          <tr><td>Blackmagic Pocket Cinema Camera 6K Pro</td><td>🟡 Not tested</td></tr>
+          <tr><td>Blackmagic Pocket Cinema Camera 4K (BMPCC4K)</td><td>🟡 Not tested</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="faq">
+      <h2>Frequently asked questions</h2>
+      <details open>
+        <summary>How do I control a Blackmagic Pocket Cinema Camera 6K remotely without a phone?</summary>
+        <p>Flash MagicPilot onto an M5Stack Core2, CoreS3 or CoreS3-SE and switch on Bluetooth on the camera. The remote connects directly over Bluetooth LE, so you don't need a phone, tablet, Wi-Fi network or the Blackmagic Camera app.</p>
+      </details>
+      <details>
+        <summary>Can MagicPilot pull focus on a BMPCC6K?</summary>
+        <p>Yes. The focus page has a NEAR → FAR slider, − / + buttons in 1% steps and a one-shot autofocus button. It works with lenses the camera can drive electronically.</p>
+      </details>
+      <details>
+        <summary>Which Blackmagic cameras are supported?</summary>
+        <p>The Blackmagic Pocket Cinema Camera 6K is tested. Other cameras that implement the Blackmagic Camera Control Bluetooth protocol, such as the BMPCC 6K G2, 6K Pro and 4K, may work but haven't been tested yet.</p>
+      </details>
+      <details>
+        <summary>What hardware do I need?</summary>
+        <p>An M5Stack Core2, CoreS3 or CoreS3-SE ESP32 touchscreen module, and optionally a microSD card for presets.</p>
+      </details>
+      <details>
+        <summary>Is MagicPilot free?</summary>
+        <p>Yes. MagicPilot is open-source firmware licensed under the <a href="https://github.com/KenFilms/MagicPilot_Remote/blob/main/LICENSE">LGPL-3.0</a>.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>⚠️ Use at your own risk. MagicPilot is provided "as is" without warranty. See the <a href="https://github.com/KenFilms/MagicPilot_Remote#disclaimer">full disclaimer</a>.</p>
+    <p>MagicPilot is an independent open-source project and is not affiliated with, endorsed by, or sponsored by Blackmagic Design Pty. Ltd. Blackmagic Design, Blackmagic Pocket Cinema Camera, BMPCC, and related names and trademarks are the property of Blackmagic Design Pty. Ltd.</p>
+    <p>© KenFilms · <a href="https://github.com/KenFilms/MagicPilot_Remote">github.com/KenFilms/MagicPilot_Remote</a></p>
+  </footer>
+</body>
+</html>

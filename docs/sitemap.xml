@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://kenfilms.github.io/MagicPilot_Remote/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <image:image>
+      <image:loc>https://kenfilms.github.io/MagicPilot_Remote/images/MagicPilot_Remote_Overview.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kenfilms.github.io/MagicPilot_Remote/images/MagicPilot_Remote_Presets.jpg</image:loc>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://kenfilms.github.io/MagicPilot_Remote/images/social-preview.jpg</video:thumbnail_loc>
+      <video:title>MagicPilot Remote demo: Bluetooth remote for the Blackmagic Pocket Cinema Camera 6K</video:title>
+      <video:description>Demo of MagicPilot Remote, an open-source ESP32 / M5Stack touchscreen remote controlling focus, exposure, recording and presets on a Blackmagic BMPCC6K over Bluetooth LE.</video:description>
+      <video:content_loc>https://kenfilms.github.io/MagicPilot_Remote/video/MagicPilot_Remote.mp4</video:content_loc>
+    </video:video>
+  </url>
+</urlset>
