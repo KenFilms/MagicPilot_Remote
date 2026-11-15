@@ -52,6 +52,8 @@ https://github.com/user-attachments/assets/88d4dcbc-c6db-4bb7-9184-9daaf6ef9eb5
 
 ### ✨ Everything You need at a Glance
 
+![Diagram of the MagicPilot Remote on an M5Stack Core2: status header with remote battery, camera mode, camera battery and Bluetooth link; timecode; ISO, shutter, FPS, white balance, tint and iris values; focus and presets buttons; record, minus/plus and connect buttons; card slot status; Bluetooth LE link to the BMPCC6K](docs/images/MagicPilot_Remote_Diagram.jpg)
+
 | | Feature | What it does |
 |---|---|---|
 | 🔭 | **Focus Control** | **NEAR → FAR** slider, 1% steps and one-shot autofocus. |
@@ -142,9 +144,9 @@ The main screen shows the camera's settings as they change. To adjust one, tap i
 | Iris | f-number | One lens stop per tap |
 | Timecode | Timecode or clip counter | Tap to switch |
 | Record | STBY / REC / PLAY | Record button |
-| Camera battery | Voltage (tap header to show) | Read only; red below 6.8 V |
-| Remote battery | Charge (tap header to show) | Read only; red below 15%, green while charging |
-| Storage cards | Type, remaining time, active slot (tap footer to show) | Read only |
+| Camera battery | Voltage (tap header to show) | Read only |
+| Remote battery | Charge (tap header to show) | Read only |
+| Storage cards | Type, remaining time (tap footer to show) | Read only |
 
 Iris changes can only reach lenses the camera can drive.
 
