@@ -2,6 +2,9 @@
 
 ### 🎬 A tiny open-source touchscreen remote for the BMPCC6K, built on ESP32 / M5Stack.
 
+> ### ⚡ [Install MagicPilot in your browser →](https://kenfilms.github.io/MagicPilot_Remote/install/)
+> Connect your M5Stack Core2, CoreS3 or CoreS3-SE by USB and flash **v1.0.0** in one click from Chrome or Edge. You don't need an IDE or a toolchain. · [Release notes](RELEASE_NOTES.md)
+
 🌐 **Website:** [kenfilms.github.io/MagicPilot_Remote](https://kenfilms.github.io/MagicPilot_Remote/)
 
 ![BlackmagicCameraControl](https://img.shields.io/badge/BlackmagicCameraControl-Aug_2025-green) 
@@ -28,6 +31,7 @@ https://github.com/user-attachments/assets/88d4dcbc-c6db-4bb7-9184-9daaf6ef9eb5
   - [Everything you need at a glance](#-everything-you-need-at-a-glance)
 - [Getting started](#getting-started)
   - [Hardware](#-hardware)
+  - [Install in your browser](#-install-in-your-browser)
   - [Build and flash](#build-and-flash)
     - [Arduino IDE](#arduino-ide)
     - [PlatformIO](#platformio)
@@ -78,6 +82,26 @@ That's it.
 
 **No phone. No Wi-Fi network. No external computer.**
 
+### ⚡ Install in your browser
+
+The quickest way to get MagicPilot onto your M5Stack is the **[web installer](https://kenfilms.github.io/MagicPilot_Remote/install/)**:
+
+1. Open the installer in **Chrome, Edge or Opera** on a desktop computer.
+2. Connect the Core2, CoreS3 or CoreS3-SE with a USB-C data cable.
+3. Click **Install MagicPilot Remote** and select the device's serial port.
+
+The installer detects the board (ESP32 for Core2, ESP32-S3 for CoreS3/CoreS3-SE) and writes the matching firmware. To flash manually instead, download the image for your board from [`docs/firmware`](docs/firmware) and write it at offset `0x0`:
+
+| Board | Image |
+|---|---|
+| M5Stack Core2 | [`MagicPilot_Remote_m5stack-core2.bin`](docs/firmware/MagicPilot_Remote_m5stack-core2.bin) |
+| M5Stack CoreS3 / CoreS3-SE | [`MagicPilot_Remote_m5stack-cores3.bin`](docs/firmware/MagicPilot_Remote_m5stack-cores3.bin) |
+
+```sh
+esptool.py --chip esp32   write_flash 0x0 MagicPilot_Remote_m5stack-core2.bin
+esptool.py --chip esp32s3 write_flash 0x0 MagicPilot_Remote_m5stack-cores3.bin
+```
+
 ### Build and flash
 
 #### Arduino IDE
@@ -112,6 +136,15 @@ pio device monitor                               # serial log at 115200 baud
 ```
 
 CoreS3-SE uses the same CoreS3 PlatformIO environment and is detected as a CoreS3-family device by the automatic uploader.
+
+The platform is pinned to `espressif32@6.12.0` (arduino-esp32 2.0.17). The firmware uses the Bluedroid BLE stack, and arduino-esp32 3.3.x ships NimBLE instead for the ESP32-S3, so the CoreS3 build fails there.
+
+To rebuild the web installer images in `docs/firmware`, run the `merged` target. It combines the bootloader, partition table and app into one image that is flashed at `0x0`:
+
+```sh
+pio run -e m5stack-core2 -t merged
+pio run -e m5stack-cores3 -t merged
+```
 
 ### 📷 Camera compatibility
 
@@ -199,8 +232,12 @@ Yes. It is open-source firmware licensed under the [LGPL-3.0](LICENSE).
 
 ## Project layout
 
-- `src/main.cpp`: the whole firmware (BLE client, camera protocol, UI).
+- `src/main.cpp`: the firmware entry point; the BLE client, camera protocol and UI live in the headers next to it.
 - `platformio.ini`: board, framework and library settings.
+- `scripts/upload_auto.py`: detects the connected board and uploads the matching build.
+- `scripts/merge_firmware.py`: the `merged` PlatformIO target that writes the web installer images.
+- `docs/firmware/`: prebuilt firmware images and the ESP Web Tools manifest.
+- `docs/install/`: the browser installer page.
 
 ## Disclaimer
 

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Install MagicPilot Remote – Web Installer for M5Stack Core2 and CoreS3</title>
+  <meta name="description" content="Flash the MagicPilot Remote firmware onto an M5Stack Core2, CoreS3 or CoreS3-SE straight from your browser. No IDE or toolchain needed.">
+  <meta name="author" content="KenFilms">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="canonical" href="https://kenfilms.github.io/MagicPilot_Remote/install/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MagicPilot Remote">
+  <meta property="og:title" content="Install MagicPilot Remote in your browser">
+  <meta property="og:description" content="Flash the MagicPilot Remote firmware onto an M5Stack Core2, CoreS3 or CoreS3-SE over USB, straight from Chrome or Edge.">
+  <meta property="og:url" content="https://kenfilms.github.io/MagicPilot_Remote/install/">
+  <meta property="og:image" content="https://kenfilms.github.io/MagicPilot_Remote/images/social-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://kenfilms.github.io/MagicPilot_Remote/images/social-preview.jpg">
+
+  <script type="module" src="https://unpkg.com/esp-web-tools@10.4.0/dist/web/install-button.js?module"></script>
+
+  <style>
+    :root { --bg: #0a0a1a; --panel: #12122a; --text: #e8e8f0; --muted: #a0a0b8; --accent: #4d6bff; --warn: #ffb020; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: #8fa2ff; }
+    header, main, footer { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    header { padding-top: 48px; text-align: center; }
+    h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.2; margin: 0 0 12px; }
+    h2 { margin-top: 48px; border-bottom: 1px solid #2a2a50; padding-bottom: 6px; font-size: 1.3rem; }
+    .lead { font-size: 1.1rem; color: var(--muted); margin: 0 auto 28px; }
+    .version { display: inline-block; font-size: .85rem; color: var(--muted); border: 1px solid #2a2a50; border-radius: 999px; padding: 2px 12px; margin-bottom: 16px; }
+    .btn { display: inline-block; margin: 6px; padding: 14px 26px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; text-decoration: none; font: 600 1.05rem/1.2 inherit; font-family: inherit; cursor: pointer; }
+    .btn:hover { filter: brightness(1.1); }
+    .btn.secondary { background: transparent; border: 1px solid var(--accent); color: var(--text); padding: 10px 20px; font-size: .95rem; }
+    esp-web-install-button { --mdc-theme-primary: #4d6bff; display: inline-block; }
+    .notice { background: var(--panel); border: 1px solid var(--warn); border-radius: 8px; padding: 12px 16px; color: var(--text); max-width: 560px; margin: 8px auto; text-align: left; }
+    .hint { color: var(--muted); font-size: .9rem; margin-top: 8px; }
+    ol li, ul li { margin: 6px 0; }
+    code { background: var(--panel); border: 1px solid #2a2a50; border-radius: 4px; padding: 1px 5px; font-size: .88em; overflow-wrap: anywhere; }
+    pre { background: var(--panel); border: 1px solid #2a2a50; border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-size: .85rem; }
+    pre code { background: none; border: 0; padding: 0; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #2a2a50; vertical-align: top; }
+    details { background: var(--panel); border: 1px solid #2a2a50; border-radius: 8px; padding: 12px 16px; margin: 10px 0; }
+    summary { cursor: pointer; font-weight: 600; }
+    footer { margin-top: 64px; padding-bottom: 40px; color: var(--muted); font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="version">Firmware v1.0.0</span>
+    <h1>Install MagicPilot Remote</h1>
+    <p class="lead">Flash MagicPilot onto your <strong>M5Stack Core2, CoreS3 or CoreS3-SE</strong> straight from the browser. The installer detects the board and writes the matching firmware. You don't need an IDE or a toolchain.</p>
+
+    <esp-web-install-button manifest="../firmware/manifest.json">
+      <button slot="activate" class="btn">⚡ Install MagicPilot Remote</button>
+      <div slot="unsupported" class="notice">Your browser doesn't support Web Serial. Open this page in <strong>Chrome, Edge or Opera on a desktop computer</strong> (Windows, macOS, Linux or ChromeOS).</div>
+      <div slot="not-allowed" class="notice">Web Serial only works on a secure page. Open <a href="https://kenfilms.github.io/MagicPilot_Remote/install/">kenfilms.github.io/MagicPilot_Remote/install</a> over https.</div>
+    </esp-web-install-button>
+    <p class="hint">Works in Chrome, Edge and Opera on desktop. Safari, Firefox and mobile browsers don't support Web Serial.</p>
+  </header>
+
+  <main>
+    <section id="steps">
+      <h2>How to install</h2>
+      <ol>
+        <li>Connect the M5Stack to your computer with a <strong>USB-C data cable</strong>. Some cables only carry power.</li>
+        <li>Click <strong>Install MagicPilot Remote</strong> and select the device's serial port in the browser dialog.</li>
+        <li>Choose <strong>Install MagicPilot Remote</strong>. If the device still runs other firmware, such as the M5Stack factory demo, tick <strong>Erase device</strong>.</li>
+        <li>Wait one to two minutes until the installer reports that it's done. The device restarts into MagicPilot.</li>
+        <li>On the camera, switch on Bluetooth. Then tap <strong>CONNECT</strong> on the remote and enter the 6-digit PIN the camera shows.</li>
+      </ol>
+      <p>Flashing replaces the firmware on the M5Stack only. Presets on the microSD card are not touched.</p>
+    </section>
+
+    <section id="firmware">
+      <h2>Firmware files</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Board</th><th>Chip</th><th>Image (flash at 0x0)</th></tr></thead>
+          <tbody>
+            <tr><td>M5Stack Core2</td><td>ESP32</td><td><a href="../firmware/MagicPilot_Remote_m5stack-core2.bin" download>MagicPilot_Remote_m5stack-core2.bin</a></td></tr>
+            <tr><td>M5Stack CoreS3 / CoreS3-SE</td><td>ESP32-S3</td><td><a href="../firmware/MagicPilot_Remote_m5stack-cores3.bin" download>MagicPilot_Remote_m5stack-cores3.bin</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>To flash an image yourself, use <a href="https://github.com/espressif/esptool" target="_blank" rel="noopener">esptool</a>:</p>
+<pre><code>esptool.py --chip esp32   write_flash 0x0 MagicPilot_Remote_m5stack-core2.bin
+esptool.py --chip esp32s3 write_flash 0x0 MagicPilot_Remote_m5stack-cores3.bin</code></pre>
+      <p>Release notes: <a href="https://github.com/KenFilms/MagicPilot_Remote/blob/main/RELEASE_NOTES.md" target="_blank" rel="noopener">v1.0.0</a>. To build from source, see the <a href="https://github.com/KenFilms/MagicPilot_Remote#build-and-flash" target="_blank" rel="noopener">build &amp; flash guide</a>.</p>
+    </section>
+
+    <section id="troubleshooting">
+      <h2>Troubleshooting</h2>
+      <details>
+        <summary>The device doesn't appear in the port list</summary>
+        <p>Try another USB-C cable or port; many cables carry power only. Depending on the revision, the Core2 uses a CP2104 or CH9102 USB-to-serial chip. On Windows or older macOS versions, you may need the driver from the chip vendor, for example the <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener">Silicon Labs CP210x driver</a>.</p>
+      </details>
+      <details>
+        <summary>CoreS3 / CoreS3-SE fails to connect or stops during flashing</summary>
+        <p>Put the CoreS3 into download mode: press and hold the reset button for about 3 seconds until the green LED lights up, then click Install again. When flashing has finished, press reset once to start MagicPilot.</p>
+      </details>
+      <details>
+        <summary>"Failed to open serial port" or the port is busy</summary>
+        <p>Close every other program that uses the port, such as the Arduino IDE serial monitor, <code>pio device monitor</code> or another browser tab with this installer.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>⚠️ Use at your own risk. MagicPilot is provided "as is" without warranty. See the <a href="https://github.com/KenFilms/MagicPilot_Remote#disclaimer" target="_blank" rel="noopener">full disclaimer</a>.</p>
+    <p>MagicPilot is an independent open-source project and is not affiliated with, endorsed by, or sponsored by Blackmagic Design Pty. Ltd. Blackmagic Design, Blackmagic Pocket Cinema Camera, BMPCC, and related names and trademarks are the property of Blackmagic Design Pty. Ltd.</p>
+    <p>Web installer powered by <a href="https://esphome.github.io/esp-web-tools/" target="_blank" rel="noopener">ESP Web Tools</a>. · <a href="../">MagicPilot Remote home</a> · © KenFilms</p>
+  </footer>
+</body>
+</html>

@@ -4,7 +4,7 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://kenfilms.github.io/MagicPilot_Remote/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <image:image>
       <image:loc>https://kenfilms.github.io/MagicPilot_Remote/images/MagicPilot_Remote_Overview.jpg</image:loc>
     </image:image>
@@ -17,5 +17,9 @@
       <video:description>Demo of MagicPilot Remote, an open-source ESP32 / M5Stack touchscreen remote controlling focus, exposure, recording and presets on a Blackmagic BMPCC6K over Bluetooth LE.</video:description>
       <video:content_loc>https://kenfilms.github.io/MagicPilot_Remote/video/MagicPilot_Remote.mp4</video:content_loc>
     </video:video>
+  </url>
+  <url>
+    <loc>https://kenfilms.github.io/MagicPilot_Remote/install/</loc>
+    <lastmod>2026-11-15</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,16 @@
+{
+  "name": "MagicPilot Remote",
+  "version": "1.0.0",
+  "new_install_prompt_erase": true,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [{ "path": "MagicPilot_Remote_m5stack-core2.bin", "offset": 0 }]
+    },
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [{ "path": "MagicPilot_Remote_m5stack-cores3.bin", "offset": 0 }]
+    }
+  ]
+}
