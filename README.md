@@ -2,8 +2,9 @@
 
 ### 🎬 A tiny open-source touchscreen remote for the BMPCC6K, built on ESP32 / M5Stack.
 
-> ### ⚡ [Install MagicPilot in your browser →](https://kenfilms.github.io/MagicPilot_Remote/install/)
-> Connect your M5Stack Core2, CoreS3 or CoreS3-SE by USB and flash **v1.0.0** in one click from Chrome or Edge. You don't need an IDE or a toolchain. · [Release notes](RELEASE_NOTES.md)
+[![Install MagicPilot Remote from your browser, in Chrome or Edge, onto a Core2, CoreS3 or CoreS3-SE](docs/images/install-button.svg)](https://kenfilms.github.io/MagicPilot_Remote/install/)
+
+**Easy install:** connect your M5Stack Core2, CoreS3 or CoreS3-SE by USB and flash **v1.0.0** in one click from Chrome or Edge in the [web installer](https://kenfilms.github.io/MagicPilot_Remote/install/). You don't need an IDE or a toolchain. · [Release notes](RELEASE_NOTES.md)
 
 🌐 **Website:** [kenfilms.github.io/MagicPilot_Remote](https://kenfilms.github.io/MagicPilot_Remote/)
 
