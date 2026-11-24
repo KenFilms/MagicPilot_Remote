@@ -116,5 +116,49 @@ esptool.py --chip esp32s3 write_flash 0x0 MagicPilot_Remote_m5stack-cores3.bin</
     <p>MagicPilot is an independent open-source project and is not affiliated with, endorsed by, or sponsored by Blackmagic Design Pty. Ltd. Blackmagic Design, Blackmagic Pocket Cinema Camera, BMPCC, and related names and trademarks are the property of Blackmagic Design Pty. Ltd.</p>
     <p>Web installer powered by <a href="https://esphome.github.io/esp-web-tools/" target="_blank" rel="noopener">ESP Web Tools</a>. · <a href="../">MagicPilot Remote home</a> · © KenFilms</p>
   </footer>
+<!-- Page counter for the GitHub traffic dashboard (Github_Dashboard/deploy/page-counter.html).
+     Counts page visits (once per page and browser session, sent with only the name of the site
+     the visitor came from) and, on web-flasher pages, finished / failed installs and .bin clicks.
+     Anonymous: no cookies, nothing about the visitor is kept, the server stores no IP address.
+     Add or update it with: python3 deploy/install-counter.py <repo-name> <page.html>... -->
+<script>
+(function () {
+  var REPO = 'MagicPilot_Remote', ENDPOINT = 'https://count.204-168-207-90.sslip.io/';
+  function ping(path, params) {
+    params.p = REPO;
+    var url = ENDPOINT + path + '?' + new URLSearchParams(params);
+    try { if (navigator.sendBeacon && navigator.sendBeacon(url)) return; } catch (e) {}
+    try { fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true }); } catch (e) {}
+  }
+  // One visit per page and browser session (reloads do not count again); crawlers are skipped.
+  if (!navigator.webdriver && !/bot|crawl|spider|slurp|headless|lighthouse/i.test(navigator.userAgent)) {
+    var seen = false, key = 'page-counter:' + location.pathname;
+    try { seen = !!sessionStorage.getItem(key); sessionStorage.setItem(key, '1'); } catch (e) {}
+    if (!seen) {
+      var from = '';
+      try { from = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) {}
+      ping('view', { u: location.pathname, r: from });
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href$=".bin"]');
+    if (a) ping('download', { f: a.getAttribute('href').split('/').pop() });
+  }, true);
+  // Web-flasher pages only. ESP Web Tools has no public "flash finished" event; its dialog
+  // keeps the result in _installState.
+  if (!document.querySelector('esp-web-install-button')) return;
+  var reported = new WeakSet();
+  setInterval(function () {
+    var dialogs = document.querySelectorAll('ewt-install-dialog');
+    for (var i = 0; i < dialogs.length; i++) {
+      var s = dialogs[i]._installState;
+      if (!s || reported.has(s) || (s.state !== 'finished' && s.state !== 'error')) continue;
+      reported.add(s);
+      ping('flash', { s: s.state === 'finished' ? 'ok' : 'fail', c: s.chipFamily || '',
+        v: (s.manifest && s.manifest.version) || '' });
+    }
+  }, 1000);
+})();
+</script>
 </body>
 </html>
